@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Course 分享 — Perplexity 獵頭應用</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="top-bar">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="scene-dots" id="sceneDots"></div>
+      </header>
+
+      <main class="slide" id="slide">
+        <section class="avatar-panel" id="avatarPanel"></section>
+        <section class="content-panel">
+          <div class="narration-card">
+            <p class="narration-label">旁白</p>
+            <p class="narration-text" id="narrationText"></p>
+          </div>
+          <div class="visual-area" id="visualArea"></div>
+        </section>
+      </main>
+
+      <footer class="nav-bar">
+        <button type="button" class="nav-btn" id="prevBtn" aria-label="上一幕">← 上一幕</button>
+        <span class="scene-counter" id="sceneCounter">1 / 6</span>
+        <button type="button" class="nav-btn nav-btn-primary" id="nextBtn" aria-label="下一幕">下一幕 →</button>
+      </footer>
+    </div>
+
+    <script src="js/scenes.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
