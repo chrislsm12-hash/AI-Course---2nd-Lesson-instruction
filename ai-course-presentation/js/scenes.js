@@ -41,4 +41,11 @@ const SCENES = [
     avatar: { expression: "proud", outfit: "default", props: ["cursor-giant"] },
     visual: { type: "agent-finale" },
   },
+  {
+    id: 7,
+    narration:
+      "多謝你睇到最後！歡迎留言分享你的想法、問題或建議，我會好好閱讀。",
+    avatar: { expression: "welcome", outfit: "default", props: [] },
+    visual: { type: "guestbook" },
+  },
 ];

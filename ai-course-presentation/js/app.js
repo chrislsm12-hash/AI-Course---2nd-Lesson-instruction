@@ -269,6 +269,8 @@ function renderVisual(scene) {
       return renderToolVsHuman();
     case "agent-finale":
       return renderAgentFinale();
+    case "guestbook":
+      return renderGuestbook();
     default:
       return "";
   }
@@ -284,13 +286,21 @@ function renderScene() {
   els.progressFill.style.width = `${((currentIndex + 1) / SCENES.length) * 100}%`;
   els.sceneCounter.textContent = `${currentIndex + 1} / ${SCENES.length}`;
   els.prevBtn.disabled = currentIndex === 0;
-  els.nextBtn.disabled = currentIndex === SCENES.length - 1;
-  els.nextBtn.textContent = currentIndex === SCENES.length - 1 ? "完結 ✓" : "下一幕 →";
+  const isLastScene = currentIndex === SCENES.length - 1;
+  const isGuestbookScene = scene.visual?.type === "guestbook";
+  els.nextBtn.disabled = isLastScene;
+  els.nextBtn.textContent = isLastScene
+    ? "完結 ✓"
+    : currentIndex === SCENES.length - 2
+      ? "留言 →"
+      : "下一幕 →";
 
   renderDots();
   renderAvatar(scene);
   typeNarration(scene.narration);
   els.visualArea.innerHTML = renderVisual(scene);
+
+  if (isGuestbookScene) initGuestbook();
 }
 
 els.prevBtn.addEventListener("click", () => goToScene(currentIndex - 1));

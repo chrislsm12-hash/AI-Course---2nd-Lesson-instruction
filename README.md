@@ -39,3 +39,18 @@ vercel --prod
 4. 按 **Save**
 
 幾分鐘後，GitHub Pages 連結即可公開瀏覽。
+
+## 留言板設定（Vercel）
+
+最後一頁設有留言板，訪客可留下姓名和訊息。留言會儲存在此 repo 的 [GitHub Issues](https://github.com/chrislsm12-hash/AI-Course---2nd-Lesson-instruction/issues)（標籤 `guestbook`），你會收到 GitHub 通知。
+
+**只需設定一次：**
+
+1. 建立 [GitHub Personal Access Token](https://github.com/settings/tokens/new?scopes=repo&description=Vercel%20Guestbook)（勾選 `repo` 權限）
+2. 在 Vercel 專案 → **Settings** → **Environment Variables**
+3. 新增變數：
+   - **Name:** `GITHUB_TOKEN`
+   - **Value:** 你的 token
+4. 重新部署（**Deployments** → 最新部署 → **Redeploy**）
+
+完成後，訪客即可在網站最後一頁留言，你可在 GitHub Issues 查看和管理。
