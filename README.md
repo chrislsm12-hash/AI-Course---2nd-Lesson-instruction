@@ -46,11 +46,18 @@ vercel --prod
 
 **只需設定一次：**
 
-1. 建立 [GitHub Personal Access Token](https://github.com/settings/tokens/new?scopes=repo&description=Vercel%20Guestbook)（勾選 `repo` 權限）
-2. 在 Vercel 專案 → **Settings** → **Environment Variables**
-3. 新增變數：
+1. 登入 GitHub 帳號 **`chrislsm12-hash`**（必須是 repo 擁有者）
+2. 建立 **Classic** Personal Access Token（不要用 Fine-grained，較易設定）  
+   👉 [建立 Classic Token](https://github.com/settings/tokens/new?scopes=public_repo&description=Vercel%20Guestbook)
+3. 勾選 **`public_repo`**（此 repo 為公開 repo）
+4. 按 **Generate token**，複製整串 token（以 `ghp_` 開頭）
+5. 在 Vercel 專案 → **Settings** → **Environment Variables**
+6. 刪除舊的 `GITHUB_TOKEN`（如有），再新增：
    - **Name:** `GITHUB_TOKEN`
-   - **Value:** 你的 token
-4. 重新部署（**Deployments** → 最新部署 → **Redeploy**）
+   - **Value:** 貼上 token（前後不要有空格）
+   - **Environments:** Production、Preview、Development 全部勾選
+7. **Redeploy** 專案
+
+> 若出現 **Bad credentials**，代表 token 無效或貼錯。請重新建立 token 並確保使用 `chrislsm12-hash` 帳號建立。
 
 完成後，訪客即可在網站最後一頁留言，你可在 GitHub Issues 查看和管理。
