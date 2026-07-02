@@ -1,6 +1,20 @@
 const REPO = "chrislsm12-hash/AI-Course---2nd-Lesson-instruction";
 const LABEL = "guestbook";
 
+function getToken() {
+  return process.env.GITHUB_TOKEN?.trim() || "";
+}
+
+function mapGithubError(message, status) {
+  if (status === 401 || message === "Bad credentials") {
+    return "GitHub 憑證無效，請在 Vercel 重新設定 GITHUB_TOKEN";
+  }
+  if (status === 403) {
+    return "GitHub 權限不足，請確認 token 已勾選 repo 或 public_repo 權限";
+  }
+  return message || "送出失敗，請稍後再試";
+}
+
 function githubHeaders(token) {
   const headers = {
     Accept: "application/vnd.github+json",
@@ -21,7 +35,7 @@ export default async function handler(req, res) {
     try {
       const response = await fetch(
         `https://api.github.com/repos/${REPO}/issues?labels=${LABEL}&state=all&per_page=50&sort=created&direction=desc`,
-        { headers: githubHeaders(process.env.GITHUB_TOKEN) }
+        { headers: githubHeaders(getToken()) }
       );
       const issues = await response.json();
       if (!response.ok || !Array.isArray(issues)) {
@@ -42,7 +56,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "POST") {
-    const token = process.env.GITHUB_TOKEN;
+    const token = getToken();
     if (!token) {
       return res.status(503).json({ error: "留言功能尚未設定，請聯絡網站管理員" });
     }
@@ -76,7 +90,7 @@ export default async function handler(req, res) {
       });
       const issue = await response.json();
       if (!response.ok) {
-        return res.status(500).json({ error: issue.message || "送出失敗，請稍後再試" });
+        return res.status(500).json({ error: mapGithubError(issue.message, response.status) });
       }
       return res.status(201).json({
         id: issue.id,
